@@ -62,6 +62,8 @@ export const login = async (req, res) => {
 export const details = async (req, res) => {
     const token = req.headers['authorization'].split(" ")[1];
     const decoded = jwt.decode(token)
+    const email = decoded.email
+    console.log('email', email)
 
     try {
         const userType = decoded.userType
@@ -70,11 +72,11 @@ export const details = async (req, res) => {
         let users = {}
 
         if (userType === 'p') {
-            users = await getPatientDetails(userType);
+            users = await getPatientDetails(userType, email);
         }
 
         if (userType === 'hp') {
-            users = await getProviderDetails(userType);
+            users = await getProviderDetails(userType, email);
         }
 
         console.log('users', users)
@@ -85,9 +87,9 @@ export const details = async (req, res) => {
     }
 }
 
-const getPatientDetails = async (userType) => {
+const getPatientDetails = async (userType, email) => {
     return await User.aggregate([
-        {$match: {userType}},
+        {$match: {userType, email}},
         {
           $lookup: {
             from: 'patients',

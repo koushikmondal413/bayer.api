@@ -1,5 +1,5 @@
 import { verifyToken } from '../middlewares/authenticator.js'
-import { details, login, signup } from '../middlewares/User.controller.js'
+import { details, login, signup } from '../controllers/User.controller.js'
 import express from 'express'
 
 const userRoute = express()
