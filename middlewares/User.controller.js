@@ -60,7 +60,31 @@ export const login = async (req, res) => {
 }
 
 export const details = async (req, res) => {
-    const users = await User.aggregate([
+    const token = req.headers['authorization'].split(" ")[1];
+    
+    const decoded = jwt.decode(token)
+
+    const userType = decoded.userType
+    console.log('userType', userType)
+    
+    let users = {}
+
+    if (userType === 'p') {
+        users = await getPatientDetails(userType);
+    }
+
+    if (userType === 'hp') {
+        users = await getProviderDetails(userType);
+    }
+
+    console.log('users', users)
+
+    res.send({users})
+}
+
+const getPatientDetails = async (userType) => {
+    return await User.aggregate([
+        {$match: {userType}},
         {
           $lookup: {
             from: 'patients',
@@ -70,8 +94,18 @@ export const details = async (req, res) => {
           }
         }
       ]);
+}
 
-    console.log('users', users)
-
-    res.send({users})
+const getProviderDetails = async (userType) => {
+    return await User.aggregate([
+        {$match: {userType}},
+        {
+          $lookup: {
+            from: 'providers',
+            localField: '_id',
+            foreignField: 'userId',
+            as: 'userDetails'
+          }
+        }
+      ]);
 }

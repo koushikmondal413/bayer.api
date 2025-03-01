@@ -18,3 +18,10 @@ export const verifyToken = (req, res, next) => {
     });
   };
 
+export const validateUserType = (req, res) => {
+  const token = req.headers['authorization'].split(" ")[1];
+
+  const decoded = jwt.decode(token)
+
+  console.log('doce')
+}
