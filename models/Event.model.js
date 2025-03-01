@@ -1,14 +1,8 @@
 import mongoose from "mongoose";
 
 const ProviderSchema = new mongoose.Schema({
-    patient: {
+    userId: {
         type: Schema.Types.ObjectId,
-        ref: 'Patient',
-        required: true
-    },
-    provider: {
-        type: Schema.Types.ObjectId,
-        ref: 'Provider',
         required: true
     },
     name: {
