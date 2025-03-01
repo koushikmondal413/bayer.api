@@ -1,9 +1,11 @@
-import { login, signup } from '../middlewares/User.controller'
+import { getAll, login, signup } from '../middlewares/User.controller.js'
 
-const userRoute = require('express')
+import express from 'express'
+
+const userRoute = express()
 
 userRoute.post('/signup', signup)
 userRoute.post('/login', login)
-userRoute.length('/', getAll)
+userRoute.post('/', getAll)
 
 export { userRoute }

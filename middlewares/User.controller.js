@@ -1,4 +1,4 @@
-import { User } from "../models/User.model";
+import { User } from "../models/User.model.js";
 
 export const signup = () => {
 
@@ -12,6 +12,7 @@ export const getAll = () => {
     const users = User.find()
     return users
 }
+
 export const verifyToken = (req, res, next) => {
     const token = req.headers['authorization'];
   
@@ -29,4 +30,3 @@ export const verifyToken = (req, res, next) => {
       next();
     });
   };
-

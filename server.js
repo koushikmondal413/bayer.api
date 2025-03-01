@@ -1,6 +1,8 @@
-const app = require('express');
-const { userRoute } = require('./routes/User.route');
-require('dotenv/config');
+import express from 'express'
+import { userRoute } from './routes/User.route.js';
+import { verifyToken } from './middlewares/User.controller.js';
+
+const app = express()
 
 app.use('/user', verifyToken, userRoute)
 
