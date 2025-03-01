@@ -1,5 +1,4 @@
 import { get, login, signup } from '../middlewares/User.controller.js'
-
 import express from 'express'
 
 const userRoute = express()

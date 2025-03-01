@@ -1,6 +1,9 @@
 import express from 'express'
 import { userRoute } from './routes/User.route.js';
 import { initializeDatabase } from './database/db.js';
+import { configDotenv } from 'dotenv';
+
+configDotenv()
 
 initializeDatabase()
 
