@@ -61,25 +61,28 @@ export const login = async (req, res) => {
 
 export const details = async (req, res) => {
     const token = req.headers['authorization'].split(" ")[1];
-    
     const decoded = jwt.decode(token)
 
-    const userType = decoded.userType
-    console.log('userType', userType)
-    
-    let users = {}
+    try {
+        const userType = decoded.userType
+        console.log("Get details, user type:", userType)
+        
+        let users = {}
 
-    if (userType === 'p') {
-        users = await getPatientDetails(userType);
+        if (userType === 'p') {
+            users = await getPatientDetails(userType);
+        }
+
+        if (userType === 'hp') {
+            users = await getProviderDetails(userType);
+        }
+
+        console.log('users', users)
+
+        res.send({users})
+    } catch (error) {
+        res.sendStatus(404)
     }
-
-    if (userType === 'hp') {
-        users = await getProviderDetails(userType);
-    }
-
-    console.log('users', users)
-
-    res.send({users})
 }
 
 const getPatientDetails = async (userType) => {
