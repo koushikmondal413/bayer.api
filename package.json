@@ -15,5 +15,9 @@
     "url": "https://github.com/koushikmondal413/bayer.api/issues"
   },
   "homepage": "https://github.com/koushikmondal413/bayer.api#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "express": "^4.21.2",
+    "mongoose": "^8.11.0"
+  }
 }
