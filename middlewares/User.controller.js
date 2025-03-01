@@ -1,3 +1,5 @@
+import { User } from "../models/User.model";
+
 export const signup = () => {
 
 }
@@ -5,8 +7,12 @@ export const signup = () => {
 export const login = () => {
 
 }
+
+export const getAll = () => {
+    const users = User.find()
+    return users
+}
 export const verifyToken = (req, res, next) => {
-  // get the auto token for the headder
     const token = req.headers['authorization'];
   
     if (!token) {
@@ -18,7 +24,7 @@ export const verifyToken = (req, res, next) => {
       if (err) {
         return res.status(500).json({ message: 'Failed to authenticate token' });
       }
-  
+      
       req.user = decoded;
       next();
     });
