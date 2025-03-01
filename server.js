@@ -1,10 +1,14 @@
 import express from 'express'
 import { userRoute } from './routes/User.route.js';
-import { verifyToken } from './middlewares/authenticator.js';
+import { initializeDatabase } from './database/db.js';
+
+initializeDatabase()
 
 const app = express()
 
-app.use('/user', verifyToken, userRoute)
+app.use(express.json());
+
+app.use('/user', userRoute)
 
 app.get('/healthcheck', (req, res) => {
     res.send("OK")

@@ -1,4 +1,4 @@
-import { getAll, login, signup } from '../middlewares/User.controller.js'
+import { get, login, signup } from '../middlewares/User.controller.js'
 
 import express from 'express'
 
@@ -6,6 +6,6 @@ const userRoute = express()
 
 userRoute.post('/signup', signup)
 userRoute.post('/login', login)
-userRoute.post('/', getAll)
+userRoute.post('/user:id', get)
 
 export { userRoute }

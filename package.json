@@ -19,6 +19,7 @@
   "homepage": "https://github.com/koushikmondal413/bayer.api#readme",
   "description": "",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "express": "^4.21.2",
     "mongoose": "^8.11.0"
   }

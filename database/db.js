@@ -1,8 +1,8 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
-const mongoURI = "mongodb://localhost:27017";
+const mongoURI = "mongodb://localhost:27017/bayer_health";
 
-const initializeDatabase = async () => {
+export const initializeDatabase = async () => {
   try {
     const connection = await mongoose.connect(mongoURI);
     if (connection) {
@@ -12,5 +12,3 @@ const initializeDatabase = async () => {
     console.log("Connection Failed", error);
   }
 };
-
-module.exports = { initializeDatabase };
