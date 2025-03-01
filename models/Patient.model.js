@@ -16,10 +16,10 @@ const GoalSchema = new mongoose.Schema({
 })
 
 const PatientSchema = new mongoose.Schema({
-    disease: {
+    diseases: {
         type: [String],
     },
-    goal: {
+    goals: {
         type: [GoalSchema],
     }
 }, {timestamps: true});

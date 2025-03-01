@@ -18,7 +18,7 @@ export const signup = async (req, res) => {
                 password: hashedPass,
                 userType
             })
-            
+
             console.log("User created:", result)
             res.send({
                 message: "User created successfully."
@@ -50,7 +50,8 @@ export const login = async (req, res) => {
             }
 
             const key = process.env.SECRET_KEY
-            const token = jwt.sign({email: user.email, userType: user.userType}, key)  
+            const token = jwt.sign({userId: user._id, email: user.email, 
+                userType: user.userType}, key)  
             res.send({token})
         })
     } catch (error) {
@@ -58,25 +59,19 @@ export const login = async (req, res) => {
     }
 }
 
-export const get = () => {
-    const users = User.find()
-    return users
-}
+export const details = async (req, res) => {
+    const users = await User.aggregate([
+        {
+          $lookup: {
+            from: 'patients',
+            localField: '_id',
+            foreignField: 'userId',
+            as: 'userDetails'
+          }
+        }
+      ]);
 
-export const verifyToken = (req, res, next) => {
-    const token = req.headers['authorization'];
-  
-    if (!token) {
-      // if token is not present return the responce with 403
-      return res.status(403).json({ message: 'No token provided' });
-    }
-    
-    jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
-      if (err) {
-        return res.status(500).json({ message: 'Failed to authenticate token' });
-      }
-      
-      req.user = decoded;
-      next();
-    });
-  };
+    console.log('users', users)
+
+    res.send({users})
+}
