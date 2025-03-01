@@ -1,6 +1,6 @@
 import express from 'express'
 import { userRoute } from './routes/User.route.js';
-import { verifyToken } from './middlewares/User.controller.js';
+import { verifyToken } from './middlewares/authenticator.js';
 
 const app = express()
 
