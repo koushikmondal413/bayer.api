@@ -4,6 +4,6 @@ import express from 'express'
 
 const eventRoute = express()
 
-eventRoute.get('/details', verifyToken, details)
+eventRoute.get('/event', verifyToken, details)
 
 export { eventRoute }
