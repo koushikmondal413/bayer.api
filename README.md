@@ -50,7 +50,7 @@ Get Event Data	GET /event
 | `/user/login`            | POST       | Login a user                             |
 | `/user/service/create`   | POST       | Create Service                           |
 | `/user/event/create`     | POST       | Create Event                             |
-| `/user/details`          | GET        | Get User Details                         |
+| `/user/details`          | GET        | Get User Details, based on user type (from the token) this will return either Patient details like Goal, disease objects or Services in case user is a Provider                         |
 | `/user/event`            | GET        | Get Event Data for that user             |
 
 ---
